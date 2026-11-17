@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL MatchZone | Ticket Booking</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6fb;
+            color: #20243a;
+        }
+
+        /* Navigation bar */
+        nav {
+            background-color: #101936;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #ffca28;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #ffca28;
+        }
+
+        /* Hero section */
+        header {
+            background: linear-gradient(120deg, #101936, #273c75);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        header p {
+            font-size: 17px;
+            color: #e0e6ff;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: #ffca28;
+            color: #101936;
+            padding: 13px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Main content */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: #687086;
+            margin-bottom: 25px;
+        }
+
+        /* Filter section */
+        .filter-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px #10193610;
+        }
+
+        .filter-form {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            padding: 12px;
+            border: 1px solid #d6dbea;
+            border-radius: 6px;
+            min-width: 220px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .apply-btn {
+            background-color: #273c75;
+            color: white;
+        }
+
+        .reset-btn {
+            background-color: #e9edf6;
+            color: #20243a;
+        }
+
+        /* Match cards */
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .match-card {
+            background-color: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px #10193612;
+            transition: transform 0.2s;
+        }
+
+        .match-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .match-top {
+            background-color: #e9edfa;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #273c75;
+            font-weight: bold;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 28px 12px;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .team {
+            flex: 1;
+        }
+
+        .team-badge {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            background-color: #101936;
+            color: #ffca28;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .team h3 {
+            font-size: 14px;
+        }
+
+        .vs {
+            font-size: 13px;
+            color: #8b92a5;
+            font-weight: bold;
+        }
+
+        .match-info {
+            border-top: 1px solid #edf0f6;
+            padding: 18px;
+        }
+
+        .match-info p {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #606a80;
+        }
+
+        .match-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 17px;
+            color: #273c75;
+        }
+
+        .book-btn {
+            background-color: #e63946;
+            color: white;
+        }
+
+        .book-btn:hover {
+            background-color: #c92d39;
+        }
+
+        .no-matches {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #101936;
+            color: #dce2f5;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .match-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header h1 {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+            }
+
+            nav a {
+                margin: 5px 8px;
+            }
+
+            header h1 {
+                font-size: 29px;
+            }
+
+            .match-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-form {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🏏 IPL MatchZone</div>
+
+        <div>
+            <a href="#matches">Matches</a>
+            <a href="#booking">Book Tickets</a>
+            <a href="#footer">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+    <header>
+        <h1>Experience the IPL Live!</h1>
+
+        <p>
+            Feel the excitement. Cheer for your team.
+            Be part of the action.
+        </p>
+
+        <a href="#matches" class="hero-btn">
+            Explore Matches
+        </a>
+    </header>
+
+    <main>
+
+        <!-- Booking information -->
+        <section id="booking" class="filter-box">
+            <h2 class="section-title">Book Your Match Tickets</h2>
+
+            <p class="section-description">
+                Choose your favourite team and explore the sample
+                match listings below.
+            </p>
+
+            <p>
+                <strong>How to book:</strong>
+                Select a match, check the venue and starting price,
+                then click the booking button.
+            </p>
+        </section>
+
+        <!-- Match filter -->
+        <section id="matches">
+            <h2 class="section-title">Upcoming Matches</h2>
+
+            <p class="section-description">
+                Find a match and choose your team.
+            </p>
+
+            <div class="filter-box">
+                <form class="filter-form" id="filterForm">
+
+                    <label for="teamfilter">
+                        Filter by team:
+                    </label>
+
+                    <select id="teamfilter" name="team">
+                        <option value="">All Teams</option>
+                        <option value="CSK">Chennai Super Kings</option>
+                        <option value="MI">Mumbai Indians</option>
+                        <option value="RCB">Royal Challengers Bengaluru</option>
+                        <option value="KKR">Kolkata Knight Riders</option>
+                        <option value="SRH">Sunrisers Hyderabad</option>
+                        <option value="RR">Rajasthan Royals</option>
+                    </select>
+
+                    <button type="submit" class="apply-btn">
+                        Apply Filter
+                    </button>
+
+                    <button type="button" class="reset-btn" id="resetBtn">
+                        Show All
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Match 1 -->
+            <div class="match-grid" id="matchGrid">
+
+                <article class="match-card" data-teams="CSK MI">
+                    <div class="match-top">
+                        SAMPLE FIXTURE 01
+                    </div>
+
+                    <div class="teams">
+                        <div class="team">
+                            <div class="team-badge">CSK</div>
+                            <h3>Chennai Super Kings</h3>
+                        </div>
+
+                        <div class="vs">VS</div>
+
+                        <div class="team">
+                            <div class="team-badge">MI</div>
+                            <h3>Mumbai Indians</h3>
+                        </div>
+                    </div>
+
+                    <div class="match-info">
+                        <p>📅 Date: To be announced</p>
+                        <p>📍 Venue: To be announced</p>
+
+                        <div class="match-footer">
+                            <span class="price">From ₹999</span>
+
+                            <button class="book-btn"
+                                data-match="CSK vs MI">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Match 2 -->
+                <article class="match-card" data-teams="RCB KKR">
+                    <div class="match-top">
+                        SAMPLE FIXTURE 02
+                    </div>
+
+                    <div class="teams">
+                        <div class="team">
+                            <div class="team-badge">RCB</div>
+                            <h3>Royal Challengers Bengaluru</h3>
+                        </div>
+
+                        <div class="vs">VS</div>
+
+                        <div class="team">
+                            <div class="team-badge">KKR</div>
+                            <h3>Kolkata Knight Riders</h3>
+                        </div>
+                    </div>
+
+                    <div class="match-info">
+                        <p>📅 Date: To be announced</p>
+                        <p>📍 Venue: To be announced</p>
+
+                        <div class="match-footer">
+                            <span class="price">From ₹1,299</span>
+
+                            <button class="book-btn"
+                                data-match="RCB vs KKR">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Match 3 -->
+                <article class="match-card" data-teams="SRH RR">
+                    <div class="match-top">
+                        SAMPLE FIXTURE 03
+                    </div>
+
+                    <div class="teams">
+                        <div class="team">
+                            <div class="team-badge">SRH</div>
+                            <h3>Sunrisers Hyderabad</h3>
+                        </div>
+
+                        <div class="vs">VS</div>
+
+                        <div class="team">
+                            <div class="team-badge">RR</div>
+                            <h3>Rajasthan Royals</h3>
+                        </div>
+                    </div>
+
+                    <div class="match-info">
+                        <p>📅 Date: To be announced</p>
+                        <p>📍 Venue: To be announced</p>
+
+                        <div class="match-footer">
+                            <span class="price">From ₹799</span>
+
+                            <button class="book-btn"
+                                data-match="SRH vs RR">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="no-matches" id="noMatches">
+                No sample matches found for this team.
+                Please select another team.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>IPL MatchZone | Cricket brings us together 🏏</p>
+        <p style="margin-top: 8px;">
+            Student demonstration project. Not an official IPL website.
+        </p>
+    </footer>
+
+    <!-- Basic interactive behaviour -->
+    <script>
+        const filterForm = document.getElementById("filterForm");
+        const teamFilter = document.getElementById("teamfilter");
+        const resetBtn = document.getElementById("resetBtn");
+        const cards = document.querySelectorAll(".match-card");
+        const noMatches = document.getElementById("noMatches");
+
+        function filterMatches() {
+            const selectedTeam = teamFilter.value;
+            let visibleCount = 0;
+
+            cards.forEach(function(card) {
+                const teams = card.dataset.teams.split(" ");
+                const matches = selectedTeam === "" ||
+                                teams.includes(selectedTeam);
+
+                card.style.display = matches ? "" : "none";
+
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            noMatches.style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+
+        filterForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            filterMatches();
+        });
+
+        resetBtn.addEventListener("click", function() {
+            teamFilter.value = "";
+            filterMatches();
+        });
+
+        document.querySelectorAll(".book-btn").forEach(function(button) {
+            button.addEventListener("click", function() {
+                alert(
+                    "You selected " + button.dataset.match +
+                    ". This is a demo page; actual ticket booking is not connected."
+                );
+            });
+        });
+    </script>
+
+</body>
+</html>

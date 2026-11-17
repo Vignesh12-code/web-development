@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+<title>matches</title>
+<style>
+    body{
+        margin: 0;
+        background-color:#0be549;
+    }
+    header{
+        background: #3604fd;
+        color:rgb(245, 243, 241);
+        text-align: center;
+        padding: 24px;
+    }
+    main{
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+    section{
+        background: rgb(205, 99, 13);
+        padding: 20px;
+        margin-bottom: 42px;
+        border-radius: 30px;
+    }
+    .filter-form-class{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+
+
+        margin-bottom: 18px;
+
+        select, button{
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-size: 15px;
+        }
+
+        select{
+        border: 1px solid #2100f9;
+        background:  rgb(255, 0, 255);
+    }
+
+    reset-btn-class{
+        baackground: #475569;
+        color: rgb(38, 253, 0);
+        border:none;
+        cursor:pointer;
+
+        }
+        table{
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+        }
+        table wrapper{
+            overflow-x: auto;
+        }
+
+</style>
+</head>
+<header>
+    <p>Jai Shri Ram</p>
+    <h1>🏏 IPL Match Schedule </h1>
+    <p>Find Your Match and Book Your Ticket</p>
+</header>
+<main>
+   <br><br>
+    <section>
+        <h2>Ticket Booking Information</h2>
+        <ul>
+            <li>Select your favourite team</li>
+            <li>Check the match date, time and venue</li>
+            <li>Compare the available ticket price</li>
+            <li>Click book to view your selected match</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Find a Match</h2>
+        <form class="filter-form-class">
+            <label for="Teamfilter">Filter by name</label>
+            <select id="Teamfilter" name="Team">
+                <option value="">All Teams</option>
+                <option value="OG RCB">Royal Challengers Bengaluru</option>
+                <option value="MI">Mumbai Indians</option>
+                <option value="SRH">Sunrisers Hyderabad</option>
+                <option value="KKR">Kolkata Knight Riders</option>
+                <option value="RR">Rajasthan Royals</option>
+                <option value="GT">Gujarat Titans</option>
+                <option value="LSG">Lucknow Super Giants</option>
+                <option value="DC">Delhi Capitals</option>
+                <option value="PBKS">Punjab Kings</option>
+            </select>
+            <button class="reset-btn-class">Apply Filter</button>
+            <button class="reset-btn-class">Show All</button>
+        </form>
+        <div class="table wrapper">
+        <table border="2">
+            <caption>Upcoming Sample Matches</caption>
+            <thead>
+                <tr>
+                    <th>Match No</th>
+                    <th>Teams</th>
+                    <th>Date & Time</th>
+                    <th>Venue</th>
+                    <th>Ticket Price</th>
+                    <th>Action</th>
+                </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>CSK-MI</td>
+                            <td>29-Jan_27 6:30</td>
+                            <td>Chennai</td>
+                            <td>800-5000/-</td>
+                            <td><button  type="submit">Book</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>RCB-MI</td>
+                                <td>31-Mar-27 6:20</td>
+                                <td>Bangalore</td>
+                                <td>800-5000/-</td>
+                                <td><button type="submit">Book</button></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    </div>
+    </section>
+    <br><br>
+</main>
